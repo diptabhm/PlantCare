@@ -5,19 +5,30 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Adapter
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.gdsc2.datahub.UserData
+import com.example.gdsc2.datahub.adapter
 import com.google.android.gms.cast.framework.media.ImagePicker
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+import java.util.ArrayList
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var recylerView: RecyclerView
+    private lateinit var datalist: ArrayList<UserData>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         val fab = findViewById<ExtendedFloatingActionButton>(R.id.add_button)
-        val imagesent: ImageView
+        recylerView = findViewById(R.id.recyclerView)
+        recylerView.layoutManager = LinearLayoutManager(this)
 
+         datalist = arrayListOf<UserData>()
         fab?.setOnClickListener {
 
             //________________________________________________________________________________
@@ -40,9 +51,12 @@ class MainActivity : AppCompatActivity() {
         if (resultCode == RESULT_OK) {
             //Image Uri will not be null for RESULT_OK
             val uri: Uri = data?.data!!
+            datalist.add(UserData(uri,"test","test"))
+
             val intent = Intent(this@MainActivity, TestingActivity::class.java)
-            intent.putExtra("imageUri", uri);
+            intent.putExtra("imageUri", uri)
             startActivity(intent)
+            recylerView.adapter = adapter(datalist)
 
         }
     }
