@@ -7,6 +7,9 @@
     tools:context=".MainActivity"
     tools:ignore="ExtraText">
 
+
+
+
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/add_button"
         android:layout_width="wrap_content"
@@ -18,43 +21,41 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
 
-        android:layout_height="match_parent"
-        android:orientation="vertical"
+    <TextView
+        android:layout_width="400dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="4dp"
+        android:paddingStart="5dp"
+        android:text="@string/your_past_records"
+        android:textSize="30sp"
+        app:flow_horizontalAlign="center"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="37dp"
-            android:paddingStart="70dp"
-            android:text="Your Past records"
-            android:textSize="35sp"
-            app:flow_horizontalAlign="center"
-            app:layout_constraintBottom_toTopOf="@+id/recyclerView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.619" />
+    <com.airbnb.lottie.LottieAnimationView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:layout_marginTop="240dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/leafscanning" />
 
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:paddingTop="10dp"
-            android:id="@+id/recyclerView"
-            android:layout_width="412dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0"
-            tools:listitem="@layout/items" />
-    </LinearLayout>
-
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="371dp"
+        android:layout_height="645dp"
+        android:layout_marginBottom="16dp"
+        android:paddingTop="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:listitem="@layout/items" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -14,6 +14,7 @@ import com.example.gdsc2.datahub.UserData
 import com.example.gdsc2.datahub.adapter
 import com.google.android.gms.cast.framework.media.ImagePicker
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+import kotlinx.coroutines.delay
 import java.util.ArrayList
 
 class MainActivity : AppCompatActivity() {
@@ -52,7 +53,6 @@ class MainActivity : AppCompatActivity() {
             //Image Uri will not be null for RESULT_OK
             val uri: Uri = data?.data!!
             datalist.add(UserData(uri,"test","test"))
-
             val intent = Intent(this@MainActivity, TestingActivity::class.java)
             intent.putExtra("imageUri", uri)
             startActivity(intent)
