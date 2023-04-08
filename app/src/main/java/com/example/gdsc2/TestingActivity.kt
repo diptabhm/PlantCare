@@ -21,7 +21,13 @@ class TestingActivity : AppCompatActivity() {
         val uri: Uri = intent.getParcelableExtra("imageUri")!!
         val textss: String? = intent.getIntExtra("disease",0).toString()
         getimage.setImageURI(uri)
-        text.text = textss
+
+        if(textss=="0")
+        text.text = "Early Blight"
+        else if(textss == "1")
+            text.text = "Late Blight"
+        else
+            text.text = "Healthy"
 
     }
 }

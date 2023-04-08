@@ -20,9 +20,11 @@ import com.google.android.gms.cast.framework.media.ImagePicker
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import kotlinx.coroutines.delay
 import org.tensorflow.lite.DataType
+import org.tensorflow.lite.support.common.ops.NormalizeOp
 import org.tensorflow.lite.support.image.ImageProcessor
 import org.tensorflow.lite.support.image.TensorImage
 import org.tensorflow.lite.support.image.ops.ResizeOp
+import org.tensorflow.lite.support.image.ops.TransformToGrayscaleOp
 import org.tensorflow.lite.support.tensorbuffer.TensorBuffer
 import java.util.ArrayList
 
@@ -30,7 +32,8 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var recylerView: RecyclerView
     private lateinit var datalist: ArrayList<UserData>
-    private var imageProcessor = ImageProcessor.Builder().add(ResizeOp(256, 256,ResizeOp.ResizeMethod.BILINEAR)).build()
+    private var imageProcessor = ImageProcessor.Builder().
+        add(ResizeOp(256, 256,ResizeOp.ResizeMethod.BILINEAR)).build()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -97,11 +100,19 @@ class MainActivity : AppCompatActivity() {
                 }
             }
 
+            var text : String
+            if(maxId==0)
+                text = "Early Blight"
+            else if(maxId == 1)
+                text = "Late Blight"
+            else
+                text = "Healthy"
+
 
 // Releases model resources if no longer used.
             model.close()
 
-            datalist.add(UserData(uri,"test","test"))
+            datalist.add(UserData(uri,"Potato leaf",text))
             val intent = Intent(this@MainActivity, TestingActivity::class.java)
             intent.putExtra("imageUri", uri)
             intent.putExtra("disease",maxId)
